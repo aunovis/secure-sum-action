@@ -1,0 +1,47 @@
+name: 'Check 1st Level Dependency Security'
+description: |-
+      Calls AUNOVIS Secure Sum which in turn calls OSSF Scorecard to calculate a Security Score for all frst level dependencies based on a configurable metric.
+author: 'AUNOVIS GmbH'
+inputs:
+  inputs:
+    description: |-
+      Filepaths or URLs to one or serveral dependencyfiles.
+    required: true
+  metric:
+    description: |-
+      Path to the metric file that defines the probes to analyse.
+    required: false
+  details:
+    description: |-
+      Print a detailed output which probes yielded which results for which repo. Defaults to true.
+    required: false
+  error-threshold:
+    description: |-
+      Overwrite the minimal score a repo must reach before an error is displayed.
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - name: Set GitHub Path
+      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+
+    - name: Check Dependencies
+      run: |
+        options=()
+        if [ -n "${{ inputs.metric }}" ]; then
+          options+=("--metric=${{ inputs.metric }}")
+        fi
+        if [ "${{ inputs.details }}" != "false" ]; then
+          options+=("--details }}")
+        fi
+        if [ -n "${{ inputs.error-threshold }}" ]; then
+          options+=("--error-threshold=${{ inputs.error-threshold }}")
+        fi
+        check_dependency_scores.sh "${options[@]}" ${{ inputs.inputs }}
+      shell: bash
+branding:
+  icon: 'shield'
+  color: 'green'
