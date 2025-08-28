@@ -19,12 +19,12 @@ jobs:
         with:
           inputs: 'examples/example_cargo.toml'
 
-      - name: Running on Cargo.toml and package.json
+      - name: Running on Cargo.toml, package.json and URL
         uses: aunovis/secure-sum-action@action
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          inputs: 'examples/example_cargo.toml examaple_package.json'
+          inputs: 'examples/example_cargo.toml examaple_package.json https://github.com/aunovis/secure_sum'
 
       - name: Running with custom metric
         uses: aunovis/secure-sum-action@action
