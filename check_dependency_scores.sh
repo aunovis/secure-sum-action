@@ -14,8 +14,10 @@ function get_latest_tag() {
 
 if ! command -v secure_sum > /dev/null; then
     version=get_latest_tag
-    echo "Installing AUNOVIS Secure Sum..."
-    curl --proto '=https' --tlsv1.2 -LsSf "https://github.com/aunovis/secure_sum/releases/download/${version}/secure_sum-installer.sh" | sh
+    echo "Installing AUNOVIS Secure Sum ${version}..."
+    installer_url="https://github.com/aunovis/secure_sum/releases/download/${version}/secure_sum-installer.sh"
+    echo "Using installer from ${installer_url}..."
+    curl --proto '=https' --tlsv1.2 -LsSf "$installer_url" | sh
 fi
 
 secure_sum "${args[@]}"

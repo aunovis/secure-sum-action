@@ -40,7 +40,8 @@ runs:
         if [ -n "${{ inputs.error-threshold }}" ]; then
           options+=("--error-threshold=${{ inputs.error-threshold }}")
         fi
-        check_dependency_scores.sh "${options[@]}" ${{ inputs.inputs }}
+        chmod +x ./check_dependency_scores.sh
+        ./check_dependency_scores.sh "${options[@]}" ${{ inputs.inputs }}
       shell: bash
 branding:
   icon: 'shield'
