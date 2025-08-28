@@ -1,0 +1,43 @@
+on: [push]
+
+jobs:
+  test-action:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    name: Testing security score scans.
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Running on Cargo.toml
+        uses: aunovis/secure-sum-action@action
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          inputs: 'examples/example_cargo.toml'
+
+      - name: Running on Cargo.toml and package.json
+        uses: aunovis/secure-sum-action@action
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          inputs: 'examples/example_cargo.toml examaple_package.json'
+
+      - name: Running with custom metric
+        uses: aunovis/secure-sum-action@action
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          inputs: 'examples/example_cargo.toml'
+          metric: 'examples/example_metric.toml'
+
+      - name: Running with custom error-threshold
+        uses: aunovis/secure-sum-action@action
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          inputs: 'examples/example_cargo.toml'
+          error-threshold: 5
