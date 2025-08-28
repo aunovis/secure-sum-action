@@ -9,7 +9,7 @@ args=("$@")
 
 function get_latest_tag() {
     local repo=aunovis/secure_sum
-    curl -s "https://api.github.com/repos/${repo}/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")'
+    curl -s "https://api.github.com/repos/${repo}/releases/latest" | sed -n 's/.*"tag_name": "\(.*\)",/\1/p'
 }
 
 if ! command -v secure_sum > /dev/null; then
