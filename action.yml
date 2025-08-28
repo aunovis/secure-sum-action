@@ -35,7 +35,7 @@ runs:
           options+=("--metric=${{ inputs.metric }}")
         fi
         if [ "${{ inputs.details }}" != "false" ]; then
-          options+=("--details }}")
+          options+=("--details")
         fi
         if [ -n "${{ inputs.error-threshold }}" ]; then
           options+=("--error-threshold=${{ inputs.error-threshold }}")
