@@ -8,8 +8,7 @@ set -eou pipefail
 args=("$@")
 
 function get_latest_tag() {
-    local repo=aunovis/secure_sum
-    curl -s "https://api.github.com/repos/${repo}/releases/latest" | sed -n 's/.*"tag_name": "\(.*\)",/\1/p'
+    curl -s "https://api.github.com/repos/aunovis/secure_sum/releases/latest" | grep '"tag_name":' | cut -d '"' -f4
 }
 
 if ! command -v secure_sum > /dev/null; then
