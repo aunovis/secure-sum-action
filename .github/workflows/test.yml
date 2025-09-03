@@ -24,7 +24,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          inputs: 'examples/example_cargo.toml example_package.json https://github.com/aunovis/secure_sum'
+          inputs: 'examples/example_cargo.toml examples/example_package.json https://github.com/aunovis/secure_sum'
 
       - name: Running with custom metric
         uses: aunovis/secure-sum-action@action

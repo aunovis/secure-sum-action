@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -eou pipefail
+set -x
 
 # This is a tiny wrapper script that ensures that secure_sum is installed, and passes any arguments on.
 # You can thus call it just as you would secure_sum.
