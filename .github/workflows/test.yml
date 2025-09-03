@@ -12,19 +12,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Running on Cargo.toml
+      - name: Running on package.json
         uses: aunovis/secure-sum-action@action
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          inputs: 'examples/example_cargo.toml'
+          inputs: 'examples/example_package.json'
 
-      - name: Running on Cargo.toml, package.json and URL
+      - name: Running on several targets with custom error-threshold
         uses: aunovis/secure-sum-action@action
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           inputs: 'examples/example_cargo.toml examples/example_package.json https://github.com/aunovis/secure_sum'
+          error-threshold: 1
 
       - name: Running with custom metric
         uses: aunovis/secure-sum-action@action
@@ -33,11 +34,3 @@ jobs:
         with:
           inputs: 'examples/example_cargo.toml'
           metric: 'examples/example_metric.toml'
-
-      - name: Running with custom error-threshold
-        uses: aunovis/secure-sum-action@action
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          inputs: 'examples/example_cargo.toml'
-          error-threshold: 5
