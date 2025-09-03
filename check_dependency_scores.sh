@@ -14,6 +14,7 @@ function install_latest_version() {
     fi
     local metadata_url="https://api.github.com/repos/aunovis/secure_sum/releases/latest"
     local repo_metadata=$(curl -s "$metadata_url")
+    echo "$repo_metadata"
     if [ -z "$repo_metadata" ]; then
         echo "URL $metadata_url did not return any metadata."
         exit 1
