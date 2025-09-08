@@ -3,7 +3,7 @@ description: |-
       Calls AUNOVIS Secure Sum which in turn calls OSSF Scorecard to calculate a Security Score for all frst level dependencies based on a configurable metric.
 author: 'AUNOVIS GmbH'
 inputs:
-  inputs:
+  targets:
     description: |-
       Filepaths or URLs to one or serveral dependencyfiles.
     required: true
@@ -41,7 +41,7 @@ runs:
           options+=("--error-threshold=${{ inputs.error-threshold }}")
         fi
         chmod +x ./check_dependency_scores.sh
-        ./check_dependency_scores.sh "${options[@]}" ${{ inputs.inputs }}
+        ./check_dependency_scores.sh "${options[@]}" ${{ inputs.targets }}
       shell: bash
 branding:
   icon: 'shield'
