@@ -22,11 +22,6 @@ for file in .github/workflows/*.yml README.md; do
     sed -i "s:$action_path@.*:$action_path@$major_version_tag:g" "$file"
 done
 
-if git diff-index --quiet HEAD --ignore-space-at-eol --; then
-  echo "You have uncommitted changes. Please commit or stash them before publishing."
-  exit 1
-fi
-
 if [ "$(git rev-parse --abbrev-ref HEAD)" != "main" ]; then
   echo "You must be on the 'main' branch to publish."
   exit 1
