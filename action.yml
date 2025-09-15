@@ -1,6 +1,6 @@
 name: 'Check 1st Level Dependency Security'
 description: |-
-      Calls AUNOVIS Secure Sum which in turn calls OSSF Scorecard to calculate a Security Score for all frst level dependencies based on a configurable metric.
+      Calls AUNOVIS Secure Sum to calculate a Security Score for all first level dependencies based on a configurable metric.
 author: 'AUNOVIS GmbH'
 inputs:
   targets:
